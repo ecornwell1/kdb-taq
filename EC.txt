@@ -1,0 +1,6 @@
+//Text file to describe user Emma Cornwell 
+
+My name is Emma Cornwell 
+I am working on the git CMTP
+I love git !!
+
