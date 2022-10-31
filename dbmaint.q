@@ -8,6 +8,7 @@ ren:{system$[WIN;"move ";"mv "],pth[x]," ",pth y}
 here:{hsym`$system$[WIN;"cd";"pwd"]}
 \d .
 
+//function to add a column to a table
 add1col:{[tabledir;colname;defaultvalue]
  if[not colname in ac:allcols tabledir;
   stdout"adding column ",(string colname)," (type ",(string type defaultvalue),") to `",string tabledir;
@@ -27,6 +28,7 @@ copy1col:{[tabledir;oldcol;newcol]
   stdout"copying ",(string oldcol)," to ",(string newcol)," in `",string tabledir;
   .os.cpy[(`)sv tabledir,oldcol;(`)sv tabledir,newcol];@[tabledir;`.d;,;newcol]]}
 
+//function to delete a specified column from a table
 delete1col:{[tabledir;col]
  if[col in ac:allcols tabledir;
   stdout"deleting column ",(string col)," from `",string tabledir;
@@ -63,6 +65,7 @@ reordercols0:{[tabledir;neworder]
  stdout"reordering columns in `",string tabledir;
  @[tabledir;`.d;:;neworder]}
 
+//function to rename a column in a specified table
 rename1col:{[tabledir;oldname;newname]
  if[(oldname in ac)and not newname in ac:allcols tabledir;
   stdout"renaming ",(string oldname)," to ",(string newname)," in `",string tabledir;
@@ -89,12 +92,14 @@ addcol:{[dbdir;table;colname;defaultvalue] / addcol[`:/data/taq;`trade;`noo;0h]
 castcol:{[dbdir;table;col;newtype] / castcol[thisdb;`trade;`size;`short]
  fncol[dbdir;table;col;newtype$]}
 
+//function that will remove attributes attached to a column in a table
 clearattrcol:{[dbdir;table;col] / clearattr[thisdb;`trade;`sym]
  setattrcol[dbdir;table;col;(`)]}
 
 copycol:{[dbdir;table;oldcol;newcol] / copycol[`:/k4/data/taq;`trade;`size;`size2]
  if[not validcolname newcol;'(`)sv newcol,`invalid.newname];
  copy1col[;oldcol;newcol]each allpaths[dbdir;table];}
+
 
 deletecol:{[dbdir;table;col] / deletecol[`:/k4/data/taq;`trade;`iz]
  delete1col[;col]each allpaths[dbdir;table];}
@@ -109,6 +114,7 @@ fixtable:{[dbdir;table;goodpartition] / fixtable[`:/k4/data/taq;`trade;`:/data/t
 fncol:{[dbdir;table;col;fn] / fncol[thisdb;`trade;`price;2*]
  fn1col[;col;fn]each allpaths[dbdir;table];}
 
+//function that will list all the columns in a table
 listcols:{[dbdir;table] / listcols[`:/k4/data/taq;`trade]
  allcols first allpaths[dbdir;table]}
 
