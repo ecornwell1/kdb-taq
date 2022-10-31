@@ -1,4 +1,4 @@
-// schema.q
+// Script to show the schemas of both Quote,Trade and Aggregation tables 
 // Quote Table Schema
 quote:([]time:`timestamp$();sym:`symbol$();bid:`float$();ask:`float$();bsize:`long$();asize:`long$());
 // trade Table Schema
